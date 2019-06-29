@@ -79,28 +79,25 @@ public class CallableStatementExample {
 		cstm.registerOutParameter(5, java.sql.Types.VARCHAR);
 		
 		cstm.executeUpdate();
-		
 		String strSuccess = cstm.getString(5);
 		System.out.println("Insert data employee sucessd: " + strSuccess);
-		//
 		cstm.close();
 		conn.close();
-		
 	}
 	public static void callProCursorGetMultiEmployee() throws SQLException,ClassNotFoundException {
 		String output="";
 		Connection conn = DbConnection.getConnection();
-		String strSql = "{call getEmployeeDeptId(?,?)}";
+		String strSql = "{call get_emplist_by_dept(?,?)}";
 		CallableStatement cstm = conn.prepareCall(strSql);
-		cstm.setInt(1, 3);
+		cstm.setInt(1, 30);
 		cstm.registerOutParameter(2, OracleTypes.CURSOR);
 		//
 		cstm.execute();
 		ResultSet result = (ResultSet)cstm.getObject(2);
 		
 		while(result.next()) {
-			output = result.getInt("emp_id")+"," + result.getString("first_name") +result.getString("last_name") 
-					+"," +result.getDate("start_date");
+			output = result.getInt("EMP_ID")+"," + result.getString("EMP_NAME") +result.getString("EMP_NO") 
+					+"," +result.getDate("HIRE_DATE");
 			System.out.println(output);
 			output = "";
 		}

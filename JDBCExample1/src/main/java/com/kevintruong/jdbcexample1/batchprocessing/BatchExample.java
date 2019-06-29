@@ -23,22 +23,17 @@ public class BatchExample {
 		String strSql1  = "update employee " + 
 						"set First_Name = 'Kevin 30' " + 
 						"where emp_id='30' " ;
-		
 		stmt.addBatch(strSql1);
-		
 		String strSql2  = "update employee " + 
 				"set First_Name = 'Kevin 29' " + 
 				"where emp_id='29' " ;
 		stmt.addBatch(strSql2);
-		
 		int[] counts = stmt.executeBatch();
-		
 		System.out.println("Sql1 count = " + counts[0]);
         System.out.println("Sql2 count = " + counts[1]);
-        
         conn.commit();
         //
-        stmt.close();
+        stmt.close();  
         conn.close();
 	}
 	
@@ -70,6 +65,9 @@ public class BatchExample {
          conn.commit();
          stmt.close();
          conn.close();
+		
+	}
+	public static void insertManyRecordMysql() {
 		
 	}
 }

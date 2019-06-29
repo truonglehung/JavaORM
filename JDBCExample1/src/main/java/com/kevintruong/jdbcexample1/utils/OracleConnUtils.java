@@ -6,9 +6,7 @@ import java.sql.SQLException;
 
 public class OracleConnUtils {
 	
-	//get connection
 	public static Connection getOracleConnection() throws  SQLException,ClassNotFoundException {
-		
 		String hostName = "localhost";
 		String sid  = "orcl";
 		String userName = "kevintruong1";
@@ -17,8 +15,8 @@ public class OracleConnUtils {
 		return getOracleConnection(hostName,sid,userName,password);
 	}
 	
-	public static Connection getOracleConnection(String hostName,String sid,String userName, String password) throws SQLException,ClassNotFoundException {
-		
+	public static Connection getOracleConnection(String hostName,String sid,String userName, String password) 
+											throws SQLException,ClassNotFoundException {
 		// below fix for java 6
 //	     Class.forName("oracle.jdbc.driver.OracleDriver");
 		String connectionURL = "jdbc:oracle:thin:@"+hostName + ":1521:" +sid ;

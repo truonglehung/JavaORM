@@ -6,15 +6,37 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.kevintruong.jdbcexample1.utils.ConnectionUtils;
+
 public class PreparedStatementExample {
 
 	public static void main(String[] args) throws SQLException,ClassNotFoundException {
 		// TODO Auto-generated method stub
-		getColumnWithParaWithoutUtils();
+//		getColumnWithParaWithoutUtils();
+		insertRow();
 	}
 	
 	
+	public static void insertRow() throws SQLException,ClassNotFoundException {
+		String strInsert = " INSERT INTO EMPLOYEE (emp_id, first_name, last_name,dept_id,start_date) " + 
+				"  values (?,?,?,?,to_date(sysdate)) ";
+		String strSelectAll = "Select * from employee where dept_id is not null " ;
+		ResultSet rs =null;
+		Connection connection =  ConnectionUtils.getMyConnection();
+		PreparedStatement  stmt = connection.prepareStatement(strInsert);
+		stmt.setInt(1, 47);
+		stmt.setString(2, "hung");
+		stmt.setString(3, "Le hung");
+		stmt.setInt(4, 3);
+		boolean flag = stmt.execute();
+		rs = stmt.executeQuery(strSelectAll);
+		while(rs.next()) {
+			System.out.println(rs.getInt(1)+ " " + rs.getString(2));
+		}
 	
+		stmt.close();
+		connection.close();
+	}
 	public static void getColumnWithParaWithoutUtils() throws SQLException,ClassNotFoundException {
 		
 		String hostname="localhost";

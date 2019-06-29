@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.Date;
 
 import com.kevintruong.jdbcexample1.utils.ConnectionUtils;
+import com.kevintruong.jdbcexample1.utils.OracleConnUtils;
 
 public class ShowData {
 
@@ -20,7 +21,7 @@ public class ShowData {
 	
 	public static void getSpecifyColumn() throws SQLException,ClassNotFoundException {
 		
-		Connection conn = ConnectionUtils.getMyConnection();
+		Connection conn = OracleConnUtils.getOracleConnection();
 		Statement statement = conn.createStatement();
 		String strSQL = "select cust_id, birth_date,first_name from individual ";
 		ResultSet result = statement.executeQuery(strSQL);
